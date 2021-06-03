@@ -1,5 +1,9 @@
-const Employee = require('./employee');
+const Employee = require('../lib/employee');
 
-describe("Employee", () => {
-    
-})
+describe("Initiliazation", () => {
+    it("Should take in a string and console log it", () => {
+        const employee = new Employee ("Mark");
+
+        expect(employee.name).toEqual("Mark");
+    });
+});
