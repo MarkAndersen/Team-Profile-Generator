@@ -5,7 +5,7 @@ const Intern = require("./lib/intern")
 const Engineer = require("./lib/engineer");
 
 const { createReadStream, writeFile } = require("fs");
-
+const team = [];
 
 
 init = () => {
@@ -54,7 +54,6 @@ addTeamMember = () => {
         }
         else {
             generateHtml();
-            //final generation when user decides not to add team members
         }
     })
 
@@ -123,18 +122,21 @@ createTeamMember = () => {
     type: "list",
     message: "Which team member would you like to add?",
     name: "addition",
-    choices: ["Intern", "Engineer"],
+    choices: ["Intern", "Engineer"]
     }
 ]) .then ((data) => {
-    if (data.choices === 'intern') {
+  console.log(data.choices)
+    if (data.choices == 'Intern') {
         createIntern();
+        console.log(data.choices)
     } else {
         createEngineer();
+        console.log(data.choices)
     }
 })
 
 };
-init();
+
 generateHtml = () => {
     const html = `<!DOCTYPE html>
     <html lang="en">
@@ -165,9 +167,9 @@ generateHtml = () => {
               <div class="card-header">Name</div>
               <div class="card-header">Manager</div>
               <div class="card-body">
-                <p class="card-title">ID:</p>
+                <p class="card-title">ID</p>
                 <a class="card-title text-white" href="mailto:">Email</a>
-                <p class="card-title">Office Number:</p>
+                <p class="card-title">Office Number</p>
               </div>
             </div>
             <div
@@ -177,7 +179,7 @@ generateHtml = () => {
               <div class="card-header">Name</div>
               <div class="card-header">Intern</div>
               <div class="card-body">
-                <p class="card-title">ID:</p>
+                <p class="card-title">ID</p>
                 <a class="card-title text-white" href="mailto:">Email</a>
                 <p class="card-title">School:</p>
               </div>
@@ -192,7 +194,7 @@ generateHtml = () => {
                 <p class="card-title">ID:</p>
                 <a class="card-title text-white" href="mailto:">Email</a>
                 <br>
-                <a class="card-title text-white" href="">Github:</a>
+                <a class="card-title text-white" href="www.github.com">Github Account</a>
               </div>
             </div>
           </div>
@@ -214,7 +216,12 @@ generateHtml = () => {
           crossorigin="anonymous"
         ></script>
       </body>
-    </html>`;
+    </html>
+    `;
 
     fs.writeFile("./dist/index.html", html, err => err ? console.error(err) : "");
 };
+
+init();
+
+//In the allotted time, I was unable to figure out how to append the user inputs from node into my dynamic HTML. I have the templates 
